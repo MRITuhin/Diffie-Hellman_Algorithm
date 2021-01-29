@@ -20,22 +20,7 @@ int main()
     cout << "****** Welcome to User B's Window ******\n\n\n";
     while (true) {
 
-        int primeNumber, primitiveRoot, secretKey, publicA, publicB, symmetricKey;
-
-        FILE* inp = fopen("server.txt", "rb");
-
-        fscanf(inp, "%d %d", &primeNumber, &primitiveRoot);
-
-        secretKey = rand() % primeNumber;
-        publicB = pow(primitiveRoot, secretKey, primeNumber);
-        cout << "B's public key is: " << publicB<< endl << "Please input A's public key: ";
-        cin >> publicA;
-        symmetricKey = pow(primitiveRoot, publicA, primeNumber);
-        cout << "Computed symmetric key: " << symmetricKey << endl << endl;
-        fclose(inp);
-
         cout<<"\nPress 1, to continue.\nPress 2, to exit.\n";
-        bac:;
         int x;
         cin>>x;
         cout<<endl;
@@ -43,8 +28,22 @@ int main()
             break;
         if (x != 1) {
             cout<<"Wrong press. Please press 1 or 2.\n";
-            goto bac;
+            continue;
         }
+
+        int primeNumber, primitiveRoot, secretKey, publicA, publicB, symmetricKey;
+
+        FILE* inp = fopen("server.txt", "rb");
+
+        fscanf(inp, "%d %d", &primeNumber, &primitiveRoot);
+rand();
+        secretKey = (rand() + time(NULL)) % primeNumber;
+        publicB = pow(primitiveRoot, secretKey, primeNumber);
+        cout << "B's public key is: " << publicB << endl << "Please input A's public key: ";
+        cin >> publicA;
+        symmetricKey = pow(publicA, secretKey, primeNumber);
+        cout << "Computed symmetric key: " << symmetricKey << endl << endl;
+        fclose(inp);
     }
     return 0;
 }
